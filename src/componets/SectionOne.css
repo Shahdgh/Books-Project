@@ -1,0 +1,36 @@
+.video {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
+    height: 90vh;
+    margin-bottom: 30px;
+}
+
+.textfirst  {
+
+    position:absolute;
+    bottom: 20rem;
+    z-index: 50;
+    font-size: 30px;
+    margin-left:23% ;  
+   
+    color: rgb(255, 255, 255);
+}
+h2{
+    font-family: 800;
+    text-align: center;
+    align-items: center;
+    font-size: 60px;
+    padding-top: 20%;
+       
+}
+p{
+font-size: 25px;
+align-items: center;
+font-family: 400;
+text-align: center;
+   margin-left:120px ;
+}
