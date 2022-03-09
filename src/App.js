@@ -9,8 +9,12 @@ import firebase from "./utils/firebase"
 import { useEffect, useState } from "react"
 import Home from "./pages/Home"
 import SignUp from "./pages/SignUp"
+<<<<<<< HEAD
 import Author from "./pages/Author"
 import OneAuthor from "./pages/OneAuthor"
+=======
+import Books from "./pages/Books"
+>>>>>>> 417e957a8ce607180c8d24af989014257adb9f7b
 // import firebase from "firebase"
 function App() {
   const [profiles, setProfiles] = useState({})
@@ -118,15 +122,20 @@ function App() {
       <NavbarItem />
       <Routes>
         <Route path="/login" element={<Login />} />
+
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
+<<<<<<< HEAD
         <Route path="/authors" element={<Author />} />
         <Route path="/authors/:authorId" element={<OneAuthor />} />
 
 
+=======
+        <Route path="/books" element={<Books />} />
+>>>>>>> 417e957a8ce607180c8d24af989014257adb9f7b
       </Routes>
     </BooksContext.Provider>
-  )
+  );
 }
 
 export default App
