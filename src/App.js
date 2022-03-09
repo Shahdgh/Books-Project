@@ -9,14 +9,29 @@ import firebase from "./utils/firebase"
 import { useEffect, useState } from "react"
 import Home from "./pages/Home"
 import SignUp from "./pages/SignUp"
+import Author from "./pages/Author"
+import OneAuthor from "./pages/OneAuthor"
 // import firebase from "firebase"
 function App() {
   const [profiles, setProfiles] = useState({})
+  const [authors, setAutors] = useState([])
+
 
   const navigate = useNavigate()
 
+
+  const getAuthors= async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/getAuthor`)
+      setAutors(response.data)
+      console.log(response.data)
+    } catch (error) {
+      console.log(error.response.data)
+    }
+  }
   useEffect(() => {
     getProfiles()
+    getAuthors()
   }, [])
   ///Sign Up user
   const signup = async e => {
@@ -95,6 +110,7 @@ function App() {
     login,
     profiles,
     logout,
+    authors,
   }
   return (
     <BooksContext.Provider value={store}>
@@ -104,6 +120,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/authors" element={<Author />} />
+        <Route path="/authors/:authorId" element={<OneAuthor />} />
+
+
       </Routes>
     </BooksContext.Provider>
   )

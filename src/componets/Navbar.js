@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { GiDirectionSign } from "react-icons/gi";
+import { GiDirectionSign,GiBookshelf } from "react-icons/gi";
 import { GoSignIn,GoSignOut } from "react-icons/go";
 import { useContext } from "react";
 import BooksContext from "../utils/BooksContext";
@@ -14,6 +14,11 @@ function NavbarItem() {
     <Navbar.Brand ><Link to="/" style={{ fontSize: "25px", color: "white", textDecoration: "none" ,marginLeft:"10px",fontFamily:'Quintessential, cursive', }}>Library Books </Link></Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
+    <Nav className="ms">
+         <Nav.Link ><Link style={{ fontSize: "18px", color: "white", textDecoration: "none",fontWeight:"600" }} to="/books">Books <GiBookshelf/></Link></Nav.Link>  
+         <Nav.Link ><Link style={{ fontSize: "18px", color: "white", textDecoration: "none",marginLeft:"5px",fontWeight:"600" }} to="/authors" >Authors </Link></Nav.Link>
+          </Nav>
+         
         {localStorage.token ? (
          <Nav className="ms-auto">
          <Nav.Link ><Link style={{ fontSize: "15px", color: "white", textDecoration: "none",fontWeight:"600" }} to="/profile">Profile <MdAssignmentInd/></Link></Nav.Link>  
