@@ -1,5 +1,5 @@
 import SectionOne from "../componets/SectionOne";
-import Books from "../componets/Books";
+import Books from "./Books";
 
 
 function Home() {

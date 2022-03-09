@@ -9,7 +9,7 @@ import firebase from "./utils/firebase"
 import { useEffect, useState } from "react"
 import Home from "./pages/Home"
 import SignUp from "./pages/SignUp"
-import Books from "./componets/Books"
+import Books from "./pages/Books"
 // import firebase from "firebase"
 function App() {
   const [profiles, setProfiles] = useState({})
