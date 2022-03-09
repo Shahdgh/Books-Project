@@ -9,6 +9,7 @@ import firebase from "./utils/firebase"
 import { useEffect, useState } from "react"
 import Home from "./pages/Home"
 import SignUp from "./pages/SignUp"
+import Books from "./componets/Books"
 // import firebase from "firebase"
 function App() {
   const [profiles, setProfiles] = useState({})
@@ -102,11 +103,13 @@ function App() {
       <NavbarItem />
       <Routes>
         <Route path="/login" element={<Login />} />
+
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/books" element={<Books />} />
       </Routes>
     </BooksContext.Provider>
-  )
+  );
 }
 
 export default App
