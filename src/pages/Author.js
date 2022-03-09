@@ -10,7 +10,7 @@ function Author() {
     <>
       
         <Col>
-          <Row xs={2} md={4}>
+          <Row xs={1} md={4} style={{marginLeft:"5px"}}>
             {authors.map(author => (
               <CardAuthors author={author} />
             ))}

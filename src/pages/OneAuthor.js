@@ -34,14 +34,16 @@ function OneAuthor() {
       </Row>
 
       <h3 style={{ margin: "15px" }}>Books Author</h3>
+      <Row md={6} xs={1} style={{gap:"15px",marginLeft:"15px"}}>
       {author.books?.map(book => (
         <Card style={{ width: "18rem", marginTop: "10px" }}>
-          <Card.Img variant="top" src={book.image} />
+          <Card.Img variant="top" src={book?.image} />
           <Card.Body>
-            <Card.Title style={{ color: "black" }}>Title : {book.title}</Card.Title>
+            <Card.Title style={{ color: "black" }}>Title : {book?.title}</Card.Title>
           </Card.Body>
         </Card>
       ))}
+      </Row>
     </>
   )
 }

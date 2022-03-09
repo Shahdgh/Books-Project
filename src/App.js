@@ -9,22 +9,18 @@ import firebase from "./utils/firebase"
 import { useEffect, useState } from "react"
 import Home from "./pages/Home"
 import SignUp from "./pages/SignUp"
-<<<<<<< HEAD
 import Author from "./pages/Author"
 import OneAuthor from "./pages/OneAuthor"
-=======
 import Books from "./pages/Books"
->>>>>>> 417e957a8ce607180c8d24af989014257adb9f7b
+import Profile from "./pages/Profile"
 // import firebase from "firebase"
 function App() {
   const [profiles, setProfiles] = useState({})
   const [authors, setAutors] = useState([])
 
-
   const navigate = useNavigate()
 
-
-  const getAuthors= async () => {
+  const getAuthors = async () => {
     try {
       const response = await axios.get(`http://localhost:5000/getAuthor`)
       setAutors(response.data)
@@ -63,6 +59,7 @@ function App() {
       toast.success("sign up success")
 
       getProfiles()
+      navigate("/login")
     } catch (error) {
       if (error.response) toast.error(error.response.data)
       else console.log(error)
@@ -125,17 +122,15 @@ function App() {
 
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
-<<<<<<< HEAD
+        <Route path="/profile" element={<Profile />} />
         <Route path="/authors" element={<Author />} />
         <Route path="/authors/:authorId" element={<OneAuthor />} />
 
-
-=======
         <Route path="/books" element={<Books />} />
->>>>>>> 417e957a8ce607180c8d24af989014257adb9f7b
       </Routes>
+    
     </BooksContext.Provider>
-  );
+  )
 }
 
 export default App
