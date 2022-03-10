@@ -23,7 +23,7 @@ function App() {
 
   const getAuthors = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/getAuthor`)
+      const response = await axios.get(`https://api-books-project.herokuapp.com/getAuthor`)
       setAutors(response.data)
       // console.log(response.data)
     } catch (error) {
@@ -31,7 +31,7 @@ function App() {
     }
   }
   const res = async () => {
-    await axios.get(`http://localhost:5000/getBook`).then(result => {
+    await axios.get(`https://api-books-project.herokuapp.com/getBook`).then(result => {
       setBooks(result.data)
       console.log(result.data)
     })
@@ -64,7 +64,7 @@ function App() {
         avatar: imageUrl || undefined,
       }
 
-      await axios.post("http://localhost:5000/api/users/signup", userBody)
+      await axios.post("https://api-books-project.herokuapp.com/api/users/signup", userBody)
       toast.success("sign up success")
 
       getProfiles()
@@ -82,7 +82,7 @@ function App() {
         email: form.elements.email.value,
         password: form.elements.password.value,
       }
-      const response = await axios.post(`http://localhost:5000/api/users/login`, userBody, {
+      const response = await axios.post(`https://api-books-project.herokuapp.com/api/users/login`, userBody, {
         headers: {
           Authorization: localStorage.token,
         },
@@ -98,7 +98,7 @@ function App() {
   //////Get Profile
   const getProfiles = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/users/profile`, {
+      const response = await axios.get(`https://api-books-project.herokuapp.com/api/users/profile`, {
         headers: {
           Authorization: localStorage.token,
         },
@@ -110,42 +110,41 @@ function App() {
     }
   }
 
-    /////////////Add book
-    const addBook = async e => {
-      e.preventDefault()
-  
-      try {
-        const form = e.target
-       
-   ///firbase
-   const image = form.elements.image.files[0]
-   let imageeUrl
-   if (image) {
-     const imageRef = firebase.storage().ref("imagBook").child(`${image.lastModified}-${image.name}-${image.size}`)
-     imageRef.put(image)
-     imageeUrl = await imageRef.getDownloadURL()
-   }
-        const bookBody = {
-          title: form.elements.title.value,
-          image: imageeUrl,
-          pages: form.elements.pages.value,
-          price: form.elements.price.value,
-         
-        }
-      const response=  await axios.post("http://localhost:5000/newBook", bookBody, {
-          headers: {
-            Authorization: localStorage.token,
-          },
-        })
-        res()
-        navigate("/")
-       
-        toast.success("add Book success")
-      } catch (error) {
-        if (error.response) toast.error(error.response.data)
-        else console.log(error)
+  /////////////Add book
+  const addBook = async e => {
+    e.preventDefault()
+
+    try {
+      const form = e.target
+
+      ///firbase
+      const image = form.elements.image.files[0]
+      let imageeUrl
+      if (image) {
+        const imageRef = firebase.storage().ref("imagBook").child(`${image.lastModified}-${image.name}-${image.size}`)
+        imageRef.put(image)
+        imageeUrl = await imageRef.getDownloadURL()
       }
+      const bookBody = {
+        title: form.elements.title.value,
+        image: imageeUrl,
+        pages: form.elements.pages.value,
+        price: form.elements.price.value,
+      }
+      const response = await axios.post("https://api-books-project.herokuapp.com/newBook", bookBody, {
+        headers: {
+          Authorization: localStorage.token,
+        },
+      })
+      res()
+      navigate("/")
+
+      toast.success("add Book success")
+    } catch (error) {
+      if (error.response) toast.error(error.response.data)
+      else console.log(error)
     }
+  }
   /////////logout///////////
   const logout = () => {
     localStorage.removeItem("token")
@@ -160,7 +159,6 @@ function App() {
     addBook,
     logout,
     authors,
-    
   }
   return (
     <BooksContext.Provider value={store}>
@@ -178,7 +176,6 @@ function App() {
         <Route path="/books" element={<Books />} />
         <Route path="/addBook" element={<AddBook />} />
       </Routes>
-    
     </BooksContext.Provider>
   )
 }
