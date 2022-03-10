@@ -13,24 +13,33 @@ import Author from "./pages/Author"
 import OneAuthor from "./pages/OneAuthor"
 import Books from "./pages/Books"
 import Profile from "./pages/Profile"
+import AddBook from "./pages/AddBook"
 // import firebase from "firebase"
 function App() {
   const [profiles, setProfiles] = useState({})
   const [authors, setAutors] = useState([])
-
+  const [books, setBooks] = useState([])
   const navigate = useNavigate()
 
   const getAuthors = async () => {
     try {
       const response = await axios.get(`http://localhost:5000/getAuthor`)
       setAutors(response.data)
-      console.log(response.data)
+      // console.log(response.data)
     } catch (error) {
       console.log(error.response.data)
     }
   }
+  const res = async () => {
+    await axios.get(`http://localhost:5000/getBook`).then(result => {
+      setBooks(result.data)
+      console.log(result.data)
+    })
+  }
+
   useEffect(() => {
     getProfiles()
+    res()
     getAuthors()
   }, [])
   ///Sign Up user
@@ -100,6 +109,43 @@ function App() {
       console.log(error.response.data)
     }
   }
+
+    /////////////Add book
+    const addBook = async e => {
+      e.preventDefault()
+  
+      try {
+        const form = e.target
+       
+   ///firbase
+   const image = form.elements.image.files[0]
+   let imageeUrl
+   if (image) {
+     const imageRef = firebase.storage().ref("imagBook").child(`${image.lastModified}-${image.name}-${image.size}`)
+     imageRef.put(image)
+     imageeUrl = await imageRef.getDownloadURL()
+   }
+        const bookBody = {
+          title: form.elements.title.value,
+          image: imageeUrl,
+          pages: form.elements.pages.value,
+          price: form.elements.price.value,
+         
+        }
+      const response=  await axios.post("http://localhost:5000/newBook", bookBody, {
+          headers: {
+            Authorization: localStorage.token,
+          },
+        })
+        res()
+        navigate("/")
+       
+        toast.success("add Book success")
+      } catch (error) {
+        if (error.response) toast.error(error.response.data)
+        else console.log(error)
+      }
+    }
   /////////logout///////////
   const logout = () => {
     localStorage.removeItem("token")
@@ -110,8 +156,11 @@ function App() {
     signup,
     login,
     profiles,
+    books,
+    addBook,
     logout,
     authors,
+    
   }
   return (
     <BooksContext.Provider value={store}>
@@ -127,6 +176,7 @@ function App() {
         <Route path="/authors/:authorId" element={<OneAuthor />} />
 
         <Route path="/books" element={<Books />} />
+        <Route path="/addBook" element={<AddBook />} />
       </Routes>
     
     </BooksContext.Provider>

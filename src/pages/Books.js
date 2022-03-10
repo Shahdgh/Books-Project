@@ -1,23 +1,16 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import axios from "axios"
 import { Card, Row } from "react-bootstrap"
-import Footer from "../componets/Footer"
+import { toast } from "react-toastify"
+import firebase from "../utils/firebase"
+import BooksContext from "../utils/BooksContext"
 
 function Books() {
-  const [books, setBooks] = useState([])
-  useEffect(() => {
-    res()
-  }, [])
-
-  const res = async () => {
-    await axios.get(`http://localhost:5000/getBook`).then(result => {
-      setBooks(result.data)
-      console.log(result.data)
-    })
-  }
-
+  const {books}=useContext(BooksContext)
+  
   return (
     <>
+   
    <Row md={6} xs={1} style={{gap:"15px",marginLeft:"15px"}}>
       {books.map(b => (
         <Card style={{ width: "18rem", marginTop: "10px" }}>
@@ -26,13 +19,13 @@ function Books() {
             <Card.Title>Title : {b.title} </Card.Title>
             <Card.Title>Pages: {b.pages}</Card.Title>
             <Card.Title>Price :{b.price} SAR</Card.Title>
-  
-
           </Card.Body>
         </Card>
       ))}
       </Row>
-   
+      
+    
+
     </>
   )
 }
