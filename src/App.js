@@ -92,7 +92,7 @@ function App() {
       toast.success("login success")
       navigate("/")
       getProfiles()
-      
+
     } catch (error) {
       if (error.response) toast.error(error.response.data)
       else console.log(error)
@@ -112,7 +112,7 @@ function App() {
       console.log(error.response.data)
     }
   }
-
+///////////////////////////
   /////////////Add book
   const addBook = async e => {
     e.preventDefault()
@@ -141,7 +141,6 @@ function App() {
       })
       res()
       navigate("/")
-
       toast.success("add Book success")
     } catch (error) {
       if (error.response) toast.error(error.response.data)
