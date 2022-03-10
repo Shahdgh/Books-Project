@@ -98,7 +98,7 @@ function App() {
       else console.log(error)
     }
   }
-  //////Get Profile
+  //////Get Pro
   const getProfiles = async () => {
     try {
       const response = await axios.get(`https://api-books-project.herokuapp.com/api/users/profile`, {
