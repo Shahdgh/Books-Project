@@ -91,6 +91,7 @@ function App() {
       localStorage.token = response.data
       toast.success("login success")
       navigate("/")
+      getProfiles()
     } catch (error) {
       if (error.response) toast.error(error.response.data)
       else console.log(error)
